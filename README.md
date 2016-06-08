@@ -1,6 +1,6 @@
 # OctoPrint-Mixpanel
 
-**TODO:** Describe what your plugin does.
+This plugin registers printer events to Mixpanel
 
 ## Setup
 
