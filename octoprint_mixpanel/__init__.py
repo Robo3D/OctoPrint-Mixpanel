@@ -16,7 +16,4 @@ class MixpanelPlugin(octoprint.plugin.StartupPlugin, octoprint.plugin.EventHandl
 			self._logger.info("File Cancelled: {}".format(p))
 	
 
-__plugin_name__ = "Mixpanel"
-__plugin_version__ = "1.0.0"
-__plugin_description__ = "Hello World! I am a mixpanel integration plugin"
 __plugin_implementation__ = MixpanelPlugin()
