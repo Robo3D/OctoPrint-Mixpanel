@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 from mixpanel import Mixpanel
-from octomix import generate_mixpanel_payload
+from helper.octomix import generate_mixpanel_payload
 
 class MixpanelPlugin(octoprint.plugin.StartupPlugin, octoprint.plugin.EventHandlerPlugin,octoprint.plugin.SettingsPlugin):
 	"""
