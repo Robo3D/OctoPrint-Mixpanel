@@ -18,7 +18,7 @@ class MixpanelPlugin(octoprint.plugin.StartupPlugin, octoprint.plugin.EventHandl
 			'$printer_name'    : 'AlphaRobo',
 			})
 		if event=="PrintCancelled":
-			# p = payload['file']
+			p = payload['file']
 			self._logger.info("File Cancelled: {}".format(p))
 			mp.track(user_id, "File Cancellation", payload)
 
