@@ -58,10 +58,10 @@ class MixpanelPlugin(octoprint.plugin.StartupPlugin, octoprint.plugin.EventHandl
 		if not hasattr(self, 'mp'):
 			# Attach static but essential mixpanel information to this Plugin instance if not already. The 2 pieces of static data are the token that links to the specific mixpanel project and the printer's id to which printer event will be correlated.
 
-			# token = self._settings.get(['token'])
-			token = '9b06295006e9455aa2d1114c1a6fa556'
-			self.printer_id = 'RoboTest'
-			# self.printer_id = self._settings.get(['printer_id'])
+			token = self._settings.get(['token'])
+			# token = '9b06295006e9455aa2d1114c1a6fa556'
+			# self.printer_id = 'RoboTest'
+			self.printer_id = self._settings.get(['printer_id'])
 			self.mp = Mixpanel(token)
 
 		mixpanel_payload = generate_mixpanel_payload(event, payload)
