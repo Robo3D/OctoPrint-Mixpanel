@@ -4,12 +4,12 @@ from __future__ import absolute_import
 import octoprint.plugin
 from mixpanel import Mixpanel
 from datetime import datetime
-from octoprint.filemanager.analysis import GcodeAnalysisQueue 
+# from octoprint.filemanager.analysis import GcodeAnalysisQueue 
 
 ###HELPER FUNCTIONS###################
 def valid_event(event):
 	"""
-	Makes sure that event is valid for mixpanel. Returns booleans.
+	Makes sure that event is valid for mixpanel. Returns booleans. 
 	"""
 	return event in [
 		'Error',
@@ -20,12 +20,17 @@ def valid_event(event):
 	]
 
 def volumetric_data():
+	# TODO Is GcodeAnalysisQueue the best way to get this data? HOw 
+	pass
 	d = GcodeAnalysisQueue()
 	return d['filament']['tool1']['volume']
 
 def generate_mixpanel_payload (event, payload):
 	"""
-	Helper function. generates and returns the mixpanel payload from the printer's event data.
+	Helper function. generates and returns the mixpanel payload based on the printer's event.
+	There are 2 types of payloads. Standard and Special. Standard payloads are subject to the same processing. For example, Standard payloads will include the key-values octoprint created plus a date and time key. Special payloads will include the key-values of Standard plus their own special key-value pairs unique to that event. For example, a PrintStart event will have a volumetric data included.
+
+	TODO: Hook that appends special payload. 
 	"""
 	special_events = ['PrintStarted']
 	
@@ -33,11 +38,11 @@ def generate_mixpanel_payload (event, payload):
 		return None
 
 	dt = datetime.utcnow()
-	payload['date'] = dt.date()
-	payload['time'] = dt.time()
+	payload['date'] = str(dt.date())
+	payload['time'] = str(dt.time())
 
-	if event in special_events:
-		payload['volume'] = volumetric_data()
+	# if event in special_events:
+	# 	payload['volume'] = volumetric_data()
 
 	return payload
 #################################
